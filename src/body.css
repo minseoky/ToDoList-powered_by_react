@@ -1,0 +1,91 @@
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css);
+
+body{
+    margin:0px;
+    padding:0px;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+input::placeholder {
+    color: black;
+}
+.main-container {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    -ms-overflow-style: none;
+    height: 100vh;
+    weight: 100vw;
+}
+.title{
+    margin:0px;
+    padding:0px;
+    position: absolute;
+    top:25%;
+    left:35%;
+    transform: translate(-50%, -50%);
+    color:black;
+    font-size: 45px;
+    font-family: 'Spoqa Han Sans';
+}
+.inputDiv{
+    margin:0px;
+    padding:0px;
+    position: absolute;
+    top:32%;
+    left:55%;
+    height: 4%;
+    width:19%;
+}
+.input{
+    font-size: 17px;
+    font-family: 'Spoqa Han Sans';
+    background-color: rgba( 255, 255, 255, 0.8 );
+    border: none;
+    color: black;
+    outline: none;
+    text-align: center;
+    border-radius: 20px;
+    float: left;
+    height: 28px;
+}
+.list{
+    margin:0px;
+    padding:0px;
+    position: absolute;
+    top:40%;
+    left:55%;
+    color:black;
+    font-size: 17px;
+    font-family: 'Spoqa Han Sans';
+    background-color: rgba( 255, 255, 255, 0.8 );
+    width: 19%;
+    border-radius: 20px;
+ }
+.list2{
+    margin:0px;
+    padding:0px;
+    position: absolute;
+    top:40%;
+    left:76%;
+    color:black;
+    font-size: 17px;
+    font-family: 'Spoqa Han Sans';
+    background-color: rgba( 255, 255, 255, 0.8 );
+    width: 19%;
+    border-radius: 20px;
+
+}
+.btn{
+    display: inline-block;
+    float: left;
+    margin-left: 20px;
+    height:30px;
+    border:none;
+    border-radius: 15px;
+    color:white;
+    width:82px;
+    font-size: 18px;
+}
