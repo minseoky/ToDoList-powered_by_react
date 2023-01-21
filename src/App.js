@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import './body.css'
-
 let randomIndex;
 const imgs = [
     'url("https://images.wallpaperscraft.com/image/single/buildings_sea_embankment_669650_3840x2400.jpg")',
@@ -14,6 +13,13 @@ function App() {
     const [todos,setTodos] = useState([]);
     const [dones,setDones] = useState([]);
     const [btnColor, setBtnColor] = useState("tomato");
+    const [time, setTime] = useState("morning");
+    const [loggedin, setLoggedin] = useState(localStorage.getItem("logged"));
+    const [clock, setClock] = useState(new Date().toLocaleString())
+
+    setInterval(() => {
+        setClock(new Date().toLocaleString());
+    }, 1000);
     useEffect(() => {
         document.querySelector("title").innerHTML = "To Do List";
     }, [])
@@ -28,6 +34,8 @@ function App() {
         setTodo("");
         setTodos((prev) => [...prev,todo]);
     }
+
+
     const onMouseEnter = () => {
         setBtnColor("orange");
     }
@@ -66,11 +74,47 @@ function App() {
         }
         setDones(tempArr);
     }
+
     useEffect(() => {
         console.log(todos);
     },[todos])
+    function LoginForm(){
+        const [name, setName] = useState("");
+        const changeName = (event) => {
+            setName(event.target.value);
+        }
+        const submitName = (event) => {
+            event.preventDefault();
+            setLoggedin(true);
+            localStorage.setItem("username", name);
+            localStorage.setItem("logged", true);
+        }
+        return(
+            <div className={'login'}>
+                <form onSubmit={submitName}>
+                    <label>good {time}, </label>
+                    <input type="text" value={name} onChange={changeName} className={"login-name"} placeholder={"input your name"}/>
+                </form>
+            </div>
+        )
+    }
+    function AfterLogin() {
+        return(
+            <div className={'afterlogin'}>
+                good {time}, {localStorage.getItem("username")}
+            </div>
+        )
+    }
+    function Clock(){
+        return(
+            <div className={"clock"}>
+                {clock}
+            </div>
+        )
+    }
     return (
         <div className={'main-container'} style={{backgroundImage:imgs[randomIndex]}}>
+            <Clock/>
             <h1 className={'title'}>My To Dos ({todos.length})</h1>
             <div className={'inputDiv'}>
                 <form onSubmit={onSubmit}>
@@ -78,8 +122,9 @@ function App() {
                     <button onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} style={{backgroundColor: btnColor}} className={'btn'}>submit</button>
                 </form>
             </div>
+            {loggedin ? <AfterLogin/> : <LoginForm/>}
 
-            <div className={'list'} style={{opacity: todos.length == 0 ? 0 : 1}}>
+            <div className={'list1'} style={{opacity: todos.length == 0 ? 0 : 1}}>
                 <div style={{textAlign : "center"}}>WHAT TO DO</div>
                 <ul>
                     {todos.map( (item) => {
