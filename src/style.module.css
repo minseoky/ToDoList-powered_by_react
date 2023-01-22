@@ -1,0 +1,149 @@
+@import url('//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css');
+.spoka * { font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif'; }
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Unbounded:wght@300;400&display=swap');
+
+.background{
+    background-color: powderblue;
+    background-size: cover;
+    height : 100vh;
+    width : 100vw;
+    padding : 0;
+    margin : 0;
+}
+body{
+    font-family: 'Spoqa Han Sans';
+    padding : 0;
+    margin : 0;
+}
+
+
+.clock{
+    position: absolute;
+    width:100%;
+    top : 18%;
+    text-align: center;
+    font-size: 80px;
+    font-family: 'Unbounded', cursive;
+    color : white;
+    text-shadow: -2px 0 #000, 0 2px #000, 2px 0 #000, 0 -2px #000;
+    background-color: transparent;
+}
+
+.mainContainer{
+    position: absolute;
+    width:100%;
+    top : 48%;
+    text-align: center;
+}
+.maintext{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 30px;
+    color : white;
+    text-shadow: -2px 0 #000, 0 2px #000, 2px 0 #000, 0 -2px #000;
+
+}
+.maintextInput{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 30px;
+    color : white;
+    text-shadow: -2px 0 #000, 0 2px #000, 2px 0 #000, 0 -2px #000;
+    background-color: transparent;
+    border-left-width:0;
+    border-right-width:0;
+    border-top-width:0;
+    border-bottom-width:2px;
+    border-color: white;
+    text-align: center;
+}
+input::placeholder{
+    color: darkgrey;
+    text-shadow: -2px 0 #333, 0 2px #333, 2px 0 #333, 0 -2px #333;
+}
+input:focus {
+    outline: none;
+}
+
+.logoutBtn{
+    position: absolute;
+    background-color: tomato;
+    color:white;
+    border:none;
+    border-radius: 25px;
+    font-size: 17px;
+    padding:10px;
+    margin : 5px;
+}
+.logoutBtn:hover{
+    position: absolute;
+    background-color: orange;
+    color:white;
+    border:none;
+    border-radius: 25px;
+    font-size: 17px;
+    padding:10px;
+    margin : 5px;
+}
+.by{
+    display: inline-block;
+    background-color: rgba(255,255,255,80%);
+    border-radius: 25px;
+    border-style: solid;
+    padding : 4px 12px;
+    position: absolute;
+    right: 4%;
+    bottom: 4%;
+}
+
+.github{
+    display: inline-block;
+    height: 15px;
+    margin: 0 0 0 9px;
+}
+.todolist{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 28px;
+    color : snow;
+    text-shadow: -2px 0 #000, 0 2px #000, 2px 0 #000, 0 -2px #000;
+    margin:0;
+    padding:0;
+    position: absolute;
+    right:7%;
+    top:20%;
+    width:25%;
+    text-align: center;
+}
+.todolistContainer{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 22px;
+    color : black;
+    text-shadow:none;
+    background-color: rgba(255,255,255,0.8);
+    border-style: solid;
+    border-radius: 20px;
+}
+
+.todolistInput{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 22px;
+    color : black;
+    background-color: transparent;
+    border-left-width:0;
+    border-right-width:0;
+    border-top-width:0;
+    border-bottom-width:2px;
+    border-color: black;
+    text-align: center;
+}
+.todolistInput::placeholder{
+    color: gray;
+    text-shadow: none;
+}
+.innerList{
+    text-align: left;
+    list-style: none;
+    padding-left: 15px;
+}
+.check{
+    zoom:1.3;
+}
