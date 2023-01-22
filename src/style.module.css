@@ -234,6 +234,7 @@ input:focus {
     border-bottom-width:2px;
     border-color: black;
     text-align: center;
+    width:80%;
 }
 .todolistInput::placeholder{
     color: gray;
