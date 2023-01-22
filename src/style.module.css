@@ -79,6 +79,7 @@ body{
     border-bottom-width:2px;
     border-color: white;
     text-align: center;
+    width:80%;
 }
 @media (max-width: 600px) {
     .maintext {
