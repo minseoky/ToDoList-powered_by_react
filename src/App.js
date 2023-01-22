@@ -8,25 +8,24 @@ const bgImgs = ["url('https://images.unsplash.com/photo-1477959858617-67f85cf4f1
     ]
 let bgIndex = Math.floor(Math.random()*3);
 function Clock(props) {
+
     useEffect(() => {
         clock();
-        modDayTime();
-        })
+        }, [])
     const clock = () => {
         setInterval(() => {
             props.setTimes([new Date().getHours(), new Date().getMinutes(), new Date().getSeconds()]);
-            clock();
             modDayTime();
         }, 1000);
     }
     const modDayTime = () => {
-        if(0 < props.times[0] && props.times[0] <= 6){
+        if(0 <= props.times[0] && props.times[0] < 6){
             props.setDayTime("새벽");
         }
-        else if(6 < props.times[0] && props.times[0] <= 12){
+        else if(6 <= props.times[0] && props.times[0] < 12){
             props.setDayTime("아침");
         }
-        else if(12 < props.times[0] && props.times[0] <= 18){
+        else if(12 <= props.times[0] && props.times[0] < 18){
             props.setDayTime("오후");
         }
         else{

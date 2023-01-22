@@ -156,8 +156,8 @@ input:focus {
 }
 @media (max-width: 600px) {
     .by {
-        right: 2%;
-        bottom: 2%;
+        right: 3%;
+        bottom: 3%;
     }
 }
 .github{
