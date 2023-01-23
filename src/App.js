@@ -170,7 +170,7 @@ function ExceptClock(props){
                 <LoginForm dayTime={props.dayTime} username={props.username} setUsername={props.setUsername}/> :
                 <AfterLogin dayTime={props.dayTime} username={props.username} setUsername={props.setUsername}/>
             }
-            <TodoList/>
+            {props.username == null ? null : <TodoList/>}
             <GithubMark/>
         </div>
     )
