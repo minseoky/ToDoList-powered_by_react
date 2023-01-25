@@ -5,13 +5,13 @@ import Swal from "sweetalert2";
 const bgImgs = ["url('https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2144&q=80')",
     "url('https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80')",
     "url('https://images.unsplash.com/photo-1513407030348-c983a97b98d8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2072&q=80')"
-    ]
+]
 let bgIndex = Math.floor(Math.random()*3);
 function Clock(props) {
     console.log('clock rerendered');
     useEffect(() => {
         clock();
-        }, [])
+    }, [])
     const clock = () => {
         setInterval(() => {
             props.setTimes([new Date().getHours(), new Date().getMinutes(), new Date().getSeconds()]);
@@ -115,6 +115,9 @@ function TodoList(){
     console.log('todolist rerendered');
     const [newlist, setNewlist] = useState("");
     const [lists, setLists] = useState(JSON.parse(localStorage.getItem("lists")));
+    const [editIndex, seteditIndex] = useState(0);
+    const [editing, setEditing] = useState(false);
+    const [inputValue, setInputvalue] = useState("");
     const onSubmit = (event) => {
         event.preventDefault();
         /* 새로운 목록과 checkbox check 상태를 리스트에 append */
@@ -133,11 +136,41 @@ function TodoList(){
         setLists(tempArr);
         localStorage.setItem("lists", JSON.stringify(lists));
     }
-    const btnOnClick = (index, e) => {
+
+    const delbtnOnClick = (index, e) => {
+        Swal.fire({
+            title: 'Are you sure to delete this?',
+            text: "your list will be disappeared.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#FF3434',
+            cancelButtonColor: '#999',
+            confirmButtonText: 'Yes, delete it'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let tempArr = [...lists];
+                tempArr.splice(index, 1);
+                setLists(tempArr);
+                localStorage.setItem("lists", JSON.stringify(lists));
+            }
+        })
+    }
+    const editbtnOnClick = (index, e) => {
+        setInputvalue(lists[index][0]); //선택한 todolist의 초기값 불러오기
+        seteditIndex(index);
+        setEditing(true);
+    }
+
+    const inputOnChange = (event) => {
+        setInputvalue(event.target.value);
+    }
+
+    const donebtnOnClick = (index, e) => {
         let tempArr = [...lists];
-        tempArr.splice(index, 1);
+        tempArr[index][0] = inputValue;
         setLists(tempArr);
-        localStorage.setItem("lists", JSON.stringify(lists));
+        setInputvalue("");
+        setEditing(false);
     }
     return(
         <div className={styles.todolist}>
@@ -145,14 +178,32 @@ function TodoList(){
             <div className={styles.todolistContainer}>
                 <form onSubmit={onSubmit}>
                     <input type={"text"} className={styles.todolistInput} value={newlist} onChange={onChange} placeholder={"write your list"}/>
-                    <ul className={styles.innerList}>
+                    <ul className={lists.length <= 6 ? styles.innerList : styles.innerListOverflow}>
                         {lists.map((item,index) => {
                             return (
                                 <div key={index}>
                                     <li className={item[1] ? styles.checked : styles.unchecked}>
-                                        <input type={"checkbox"} onChange={(e)=>{checkOnChange(index, e)}} checked={item[1]} className={styles.check}></input>
-                                        {item[0]}
-                                        <img alt={"delete"} className={styles.deleteBtn} onClick={(e) => btnOnClick(index,e)} src={"https://cdn-icons-png.flaticon.com/512/3334/3334328.png"}></img>
+                                        <div>
+                                            <input
+                                                type={"checkbox"}
+                                                onChange={(e)=>{checkOnChange(index, e)}}
+                                                checked={item[1]}
+                                                className={styles.check}>
+                                            </input>
+                                            {editIndex === index && editing === true ?
+                                                <input className={styles.editInput} type={"text"} onChange={inputOnChange} value={inputValue}></input>
+                                                : item[0]
+                                            }
+                                            {editing == true ?
+                                                null : <img alt={"delete"} className={styles.deleteBtn} onClick={(e) => delbtnOnClick(index,e)} src={"https://cdn-icons-png.flaticon.com/512/3334/3334328.png"}/>
+                                            }
+                                            {editIndex == index && editing == true ?
+                                                <img alt={"done"} className={styles.doneBtn} onClick={(e) => donebtnOnClick(index,e)} src={"https://img.icons8.com/material-outlined/512/checked.png"}/>
+                                                : <img alt={"edit"} className={styles.editBtn} onClick={(e) => editbtnOnClick(index,e)} src={"https://img.icons8.com/material-outlined/512/pencil.png"}/>
+                                            }
+
+
+                                        </div>
                                     </li>
                                 </div>
                             )
@@ -182,13 +233,26 @@ function App() {
     const [username, setUsername] = useState(null);
 
     useEffect(() => {
+        //dayTime Default
+        if(0 <= times[0] && times[0] < 6){
+            setDayTime("새벽");
+        }
+        else if(6 <= times[0] && times[0] < 12){
+            setDayTime("아침");
+        }
+        else if(12 <= times[0] && times[0] < 18){
+            setDayTime("오후");
+        }
+        else{
+            setDayTime("밤");
+        }
         if(localStorage.getItem("username") !== null){
             setUsername(localStorage.getItem("username"));
         }
         if(localStorage.getItem("lists") == null){
             localStorage.setItem("lists", JSON.stringify([]));
         }
-        },[])
+    },[])
     return (
         <div
             className={styles.background}
