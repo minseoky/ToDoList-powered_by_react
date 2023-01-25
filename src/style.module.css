@@ -274,7 +274,7 @@ input:focus {
 }
 .deleteBtn{
     float:right;
-    margin:6px 6px 0 0;
+    margin:6px 4px 0 0;
     padding:2px;
     width:20px;
     height: 20px;
@@ -283,7 +283,7 @@ input:focus {
 }
 .editBtn{
     float:right;
-    margin:7px 6px 0 0;
+    margin:7px 4px 0 0;
     padding:2px;
     width:20px;
     height: 20px;
@@ -292,7 +292,7 @@ input:focus {
 }
 .doneBtn{
     float:right;
-    margin:7px 6px 0 0;
+    margin:7px 4px 0 0;
     padding:2px;
     width:20px;
     height: 20px;
@@ -307,3 +307,14 @@ input:focus {
     padding: 0px;
     font-family: 'Spoqa Han Sans';
 }
+
+::-webkit-scrollbar {
+    background-color: transparent;
+    width:10px;
+}
+::-webkit-scrollbar-thumb {
+     background-color: #2f3542;
+     border-radius: 10px;
+     background-clip: padding-box;
+     border: 2px solid transparent;
+ }
