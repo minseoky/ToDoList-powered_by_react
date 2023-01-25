@@ -29,7 +29,7 @@ body{
     text-shadow: -2px 0 #000, 0 2px #000, 2px 0 #000, 0 -2px #000;
     background-color: transparent;
 }
-@media (max-width: 600px) {
+@media (max-width: 930px) {
     .clock {
         top : 10%;
         font-size: 50px;
@@ -318,3 +318,62 @@ input:focus {
      background-clip: padding-box;
      border: 2px solid transparent;
  }
+.weatherBox{
+    font-family: 'Spoqa Han Sans';
+    position : absolute;
+    left:8%;
+    top:12%;
+    width:240px;
+    height:120px;
+    background: linear-gradient( to right, rgba(255,255,255,0.8), rgba(155,155,155,0.8));
+    border-radius: 20px;
+    padding:10px;
+    border-style: solid;
+}
+@media (max-width: 930px) {
+    .weatherBox {
+        position : center;
+        left:1%;
+        top: 20%;
+        width:150px;
+        height:60px;
+    }
+}
+.weatherIcon{
+    float:right;
+    margin : 10px 10px 10px 0;
+    width:100px;
+    height:100px;
+    transform: scale(1.4);
+}
+@media (max-width: 930px) {
+    .weatherIcon {
+        margin : -15px -15px 0 0;
+        width:100px;
+        height:20px;
+        transform: scale(0.7);
+    }
+}
+.weatherText{
+    float:left;
+    width:60px;
+    height:110px;
+    margin : 5px;
+    font-size:22px;
+}
+@media (max-width: 930px) {
+    .weatherText {
+        margin : 1px;
+        font-size:14px;
+    }
+}
+.weatherTextMini{
+    margin-top:18px;
+    font-size:16px;
+}
+@media (max-width: 930px) {
+    .weatherTextMini {
+        margin-top:8px;
+        font-size:11px;
+    }
+}

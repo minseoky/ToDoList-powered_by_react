@@ -7,6 +7,11 @@ const bgImgs = ["url('https://images.unsplash.com/photo-1477959858617-67f85cf4f1
     "url('https://images.unsplash.com/photo-1513407030348-c983a97b98d8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2072&q=80')"
 ]
 let bgIndex = Math.floor(Math.random()*3);
+
+
+
+
+
 function Clock(props) {
     console.log('clock rerendered');
     useEffect(() => {
@@ -111,6 +116,62 @@ function GithubMark() {
         </div>
     )
 }
+function WeatherInfo() {
+    const [weatherInfo, setWeatherInfo] = useState([]);// 0 : temp, 1 : weather, 2 : place, 3 : code, 4 : icon
+    const [loading, setLoading] = useState(false);
+    const getSuccess = (position) => {
+        const APIKEY = 'cead9018524fcdd92d9c3b06baf01646';
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        const url = 'https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=' + APIKEY
+
+        fetch(url).then((response) => response.json()).then((data) => {
+            setWeatherInfo([Math.floor(data.main.temp-273.15),data.weather[0].main,data.name, data.weather[0].id, data.weather[0].icon]);
+            setLoading(true);
+        })
+    }
+    const WeatherIcon = () => {
+        return(
+            <div className={styles.weatherIcon}>
+                <img src={"http://openweathermap.org/img/wn/"+ weatherInfo[4] +"@2x.png"} alt="weather_img"/>
+            </div>
+        )
+    }
+    const WeatherText = () => {
+        return(
+            <div className={styles.weatherText}>
+                <div>
+                    {weatherInfo[0]}°C
+                </div>
+                <div>
+                    {weatherInfo[1]}
+                </div>
+                <div className={styles.weatherTextMini}>
+                    {weatherInfo[2]}
+                </div>
+            </div>
+
+        )
+    }
+
+    const getErr = () => {
+
+    }
+    //API
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(getSuccess,getErr);
+    },[])
+
+
+
+    return(
+        <div className={styles.weatherBox}>
+
+            {loading ? <WeatherText/> : null}
+            {loading ? <WeatherIcon code={weatherInfo[3]}/> : null}
+        </div>
+    )
+}
 function TodoList(){
     console.log('todolist rerendered');
     const [newlist, setNewlist] = useState("");
@@ -118,6 +179,7 @@ function TodoList(){
     const [editIndex, seteditIndex] = useState(0);
     const [editing, setEditing] = useState(false);
     const [inputValue, setInputvalue] = useState("");
+
     const onSubmit = (event) => {
         event.preventDefault();
         /* 새로운 목록과 checkbox check 상태를 리스트에 append */
@@ -194,10 +256,10 @@ function TodoList(){
                                                 <input className={styles.editInput} type={"text"} onChange={inputOnChange} value={inputValue}></input>
                                                 : item[0]
                                             }
-                                            {editing == true ?
+                                            {editing === true ?
                                                 null : <img alt={"delete"} className={styles.deleteBtn} onClick={(e) => delbtnOnClick(index,e)} src={"https://cdn-icons-png.flaticon.com/512/3334/3334328.png"}/>
                                             }
-                                            {editIndex == index && editing == true ?
+                                            {editIndex === index && editing === true ?
                                                 <img alt={"done"} className={styles.doneBtn} onClick={(e) => donebtnOnClick(index,e)} src={"https://img.icons8.com/material-outlined/512/checked.png"}/>
                                                 : <img alt={"edit"} className={styles.editBtn} onClick={(e) => editbtnOnClick(index,e)} src={"https://img.icons8.com/material-outlined/512/pencil.png"}/>
                                             }
@@ -217,6 +279,7 @@ function TodoList(){
 function ExceptClock(props){
     return(
         <div>
+            <WeatherInfo/>
             {props.username == null ?
                 <LoginForm dayTime={props.dayTime} username={props.username} setUsername={props.setUsername}/> :
                 <AfterLogin dayTime={props.dayTime} username={props.username} setUsername={props.setUsername}/>
@@ -233,19 +296,6 @@ function App() {
     const [username, setUsername] = useState(null);
 
     useEffect(() => {
-        //dayTime Default
-        if(0 <= times[0] && times[0] < 6){
-            setDayTime("새벽");
-        }
-        else if(6 <= times[0] && times[0] < 12){
-            setDayTime("아침");
-        }
-        else if(12 <= times[0] && times[0] < 18){
-            setDayTime("오후");
-        }
-        else{
-            setDayTime("밤");
-        }
         if(localStorage.getItem("username") !== null){
             setUsername(localStorage.getItem("username"));
         }
