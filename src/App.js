@@ -16,6 +16,7 @@ function Clock(props) {
     console.log('clock rerendered');
     useEffect(() => {
         clock();
+        modDayTime();
     }, [])
     const clock = () => {
         setInterval(() => {
@@ -51,6 +52,9 @@ function LoginForm(props) {
     const onChange = (event) => {
         setName(event.target.value);
     }
+    useEffect(() => {
+        console.log('daytime mod-');
+    }, [props.dayTime])
     const loginSubmit = (event) => {
         if(name.length < 6){
             event.preventDefault();
@@ -99,6 +103,9 @@ function AfterLogin(props) {
             }
         })
     }
+    useEffect(() => {
+        console.log('daytime mod-');
+    }, [props.dayTime])
     return(
         <div className={styles.mainContainer}>
             <div className={styles.maintext}>
@@ -194,7 +201,7 @@ function TodoList(){
     }
     useEffect(() => {
         localStorage.setItem("lists", JSON.stringify(lists));
-    }, [lists])
+    }, [lists,editIndex,editing])
     const onChange = (event) => {
         setNewlist(event.target.value);
     }
@@ -326,7 +333,6 @@ function Quotes(){
     useEffect(() => {
         setTodaysQuote(quotes[Math.floor(Math.random() * quotes.length)]);
     }, []);
-    console.log('aa');
     return(
         <div className={styles.quoteBox}>
             <div className={styles.quote}>
