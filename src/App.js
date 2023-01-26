@@ -153,7 +153,13 @@ function WeatherInfo() {
 
         )
     }
-
+    const LoadingText = () => {
+        return(
+            <div className={styles.loading}>
+                Loading...
+            </div>
+        )
+    }
     const getErr = () => {
 
     }
@@ -167,7 +173,7 @@ function WeatherInfo() {
     return(
         <div className={styles.weatherBox}>
 
-            {loading ? <WeatherText/> : null}
+            {loading ? <WeatherText/> : <LoadingText/>}
             {loading ? <WeatherIcon code={weatherInfo[3]}/> : null}
         </div>
     )
@@ -276,10 +282,71 @@ function TodoList(){
         </div>
     )
 }
+
+function Quotes(){
+    const [todaysQuote, setTodaysQuote] = useState("")
+    const quotes = [
+        [
+            "The way to get started is to quit talking and begin doing.",
+            "-Walt Disney-"
+        ],
+        [
+            "Life is what happens when you're busy making other plans.",
+            "-John Lennon-"
+        ],
+        [
+            "The world is a book and those who do not travel read only one page.",
+            "-Saint Augustine-"
+        ],
+        [
+            "Life is either a daring adventure or nothing at all.",
+            "-Helen Keller-"
+        ],
+        [
+            "To Travel is to Live",
+            "-Hans Christian Andersen-"
+        ],
+        [
+            "Only a life lived for others is a life worthwhile.",
+            "-Albert Einstein-"
+        ],
+        [
+            "You only live once, but if you do it right, once is enough.",
+            "-Mae West-"
+        ],
+        [
+            "Never go on trips with anyone you do not love.",
+            "-Hemmingway-"
+        ],
+        [
+            "We wander for distraction, but we travel for fulfilment.",
+            "-Hilaire Belloc-"
+        ],
+        [
+            "Travel expands the mind and fills the gap.",
+            "-Sheda Savage-"
+        ],
+    ];
+    useEffect(() => {
+        setTodaysQuote(quotes[Math.floor(Math.random() * quotes.length)]);
+    }, []);
+    console.log('aa');
+    return(
+        <div className={styles.quoteBox}>
+            <div className={styles.quote}>
+                {todaysQuote[0]}
+            </div>
+            <div className={styles.author}>
+                {todaysQuote[1]}
+            </div>
+        </div>
+    )
+}
 function ExceptClock(props){
     return(
         <div>
             <WeatherInfo/>
+            <Quotes/>
             {props.username == null ?
                 <LoginForm dayTime={props.dayTime} username={props.username} setUsername={props.setUsername}/> :
                 <AfterLogin dayTime={props.dayTime} username={props.username} setUsername={props.setUsername}/>
