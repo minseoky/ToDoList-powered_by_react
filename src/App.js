@@ -287,43 +287,39 @@ function Quotes(){
     const [todaysQuote, setTodaysQuote] = useState("")
     const quotes = [
         [
-            "The way to get started is to quit talking and begin doing.",
+            "The way to get started is to quit talking and begin doing.\n",
             "-Walt Disney-"
         ],
         [
-            "Life is what happens when you're busy making other plans.",
+            "Life is what happens when you're busy making other plans.\n",
             "-John Lennon-"
         ],
         [
-            "The world is a book and those who do not travel read only one page.",
-            "-Saint Augustine-"
-        ],
-        [
-            "Life is either a daring adventure or nothing at all.",
+            "Life is either a daring adventure or nothing at all.\n",
             "-Helen Keller-"
         ],
         [
-            "To Travel is to Live",
+            "To Travel is to Live\n",
             "-Hans Christian Andersen-"
         ],
         [
-            "Only a life lived for others is a life worthwhile.",
+            "Only a life lived for others is a life worthwhile.\n",
             "-Albert Einstein-"
         ],
         [
-            "You only live once, but if you do it right, once is enough.",
+            "You only live once, but if you do it right, once is enough.\n",
             "-Mae West-"
         ],
         [
-            "Never go on trips with anyone you do not love.",
+            "Never go on trips with anyone you do not love.\n",
             "-Hemmingway-"
         ],
         [
-            "We wander for distraction, but we travel for fulfilment.",
+            "We wander for distraction, but we travel for fulfilment.\n",
             "-Hilaire Belloc-"
         ],
         [
-            "Travel expands the mind and fills the gap.",
+            "Travel expands the mind and fills the gap.\n",
             "-Sheda Savage-"
         ],
     ];
